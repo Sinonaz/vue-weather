@@ -1,9 +1,9 @@
-<script setup>
-</script>
-
 <template>
-  <h1>Hello world</h1>
+  <h1>{{ date }}</h1>
 </template>
 
-<style scoped>
-</style>
+<script setup>
+const date = new Date().toLocaleString()
+</script>
+
+<style scoped></style>
