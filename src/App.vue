@@ -1,9 +1,9 @@
 <script setup>
+const date = new Date()
 </script>
 
 <template>
-  <h1>Hello world</h1>
+  <h1>{{ date }}</h1>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>
