@@ -1,7 +1,9 @@
-<script setup></script>
+<script setup>
+const data = new Date().toLocaleString()
+</script>
 
 <template>
-  <h1>{{ new Date().toLocaleString() }}</h1>
+  <h1>{{ data }}</h1>
 </template>
 
 <style scoped></style>
