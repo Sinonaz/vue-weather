@@ -1,10 +1,10 @@
-<script setup></script>
-
 <template>
   <button type="button" class="button">
     <slot />
   </button>
 </template>
+
+<script setup></script>
 
 <style scoped>
 .button {
