@@ -1,28 +1,28 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 :root {
-  --body-bg: #343d4b;
-  --dark-gray: #222831;
-  --gray: #272e37;
-  --light-gray: #3a434f;
-  --white: #ffffff;
-  --gradient: linear-gradient(90.8deg, rgba(144, 217, 224, 0.9) 0.2%, rgba(84, 96, 230, 0.9) 100%);
-  --gradient-hover: linear-gradient(256.33deg, rgba(144, 217, 224, 0.9) 9.04%, rgba(84, 96, 230, 0.9) 92.2%);
-  --font-primary: "Montserrat", sans-serif;
+	--body-bg: #343d4b;
+	--dark-gray: #222831;
+	--gray: #272e37;
+	--light-gray: #3a434f;
+	--white: #ffffff;
+	--gradient: linear-gradient(90.8deg, rgba(144, 217, 224, 0.9) 0.2%, rgba(84, 96, 230, 0.9) 100%);
+	--gradient-hover: linear-gradient(256.33deg, rgba(144, 217, 224, 0.9) 9.04%, rgba(84, 96, 230, 0.9) 92.2%);
+	--font-primary: 'Montserrat', sans-serif;
 }
 
 html {
-  height: 100%;
+	height: 100%;
 }
 
 body {
-  margin: 0;
-  height: 100%;
-  font-family: var(--font-primary);
-  color: var(--white);
-  background: var(--body-bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	margin: 0;
+	height: 100%;
+	font-family: var(--font-primary);
+	color: var(--white);
+	background: var(--body-bg);
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
