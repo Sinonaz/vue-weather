@@ -1,5 +1,5 @@
 <script setup>
-import Button from './components/Button.vue'
+import AppButton from './components/AppButton.vue'
 </script>
 
 <template>
@@ -8,7 +8,7 @@ import Button from './components/Button.vue'
       <div class="weather__left"></div>
 
       <div class="weather__right">
-        <Button> Изменить город </Button>
+        <AppButton> Изменить город </AppButton>
       </div>
     </div>
   </main>
