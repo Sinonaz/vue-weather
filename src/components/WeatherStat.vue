@@ -1,11 +1,16 @@
 <template>
   <p class="stat">
-    <span class="stat__name">Влажность</span>
-    <span class="stat__value">90%</span>
+    <span class="stat__name">{{ label }}</span>
+    <span class="stat__value">{{ value }}</span>
   </p>
 </template>
 
-<script setup></script>
+<script setup>
+  defineProps({
+    label: String,
+    value: String,
+  })
+</script>
 
 <style scoped>
   .stat {

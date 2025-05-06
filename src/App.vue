@@ -1,6 +1,21 @@
 <script setup>
   import CitySelect from './components/CitySelect.vue'
   import WeatherStat from './components/WeatherStat.vue'
+
+  const cityStats = [
+    {
+      label: 'Влажность',
+      value: '90%',
+    },
+    {
+      label: 'Осадки',
+      value: '0%',
+    },
+    {
+      label: 'Ветер',
+      value: '3 м/ч',
+    },
+  ]
 </script>
 
 <template>
@@ -10,7 +25,7 @@
 
       <div class="weather__right">
         <div class="weather__stats">
-          <WeatherStat />
+          <WeatherStat v-for="stat in cityStats" :key="stat.label" v-bind="stat" />
         </div>
 
         <CitySelect />
