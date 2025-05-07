@@ -1,0 +1,18 @@
+meta {
+  name: forecast
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://api.weatherapi.com/v1/forecast.json?q=Калининград&lang=ru&key=6346860df8e747d2b20173736250705&days=3
+  body: none
+  auth: inherit
+}
+
+params:query {
+  q: Калининград
+  lang: ru
+  key: 6346860df8e747d2b20173736250705
+  days: 3
+}

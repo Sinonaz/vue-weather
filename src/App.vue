@@ -1,8 +1,12 @@
 <script setup>
+  import { ref } from 'vue'
   import CitySelect from './components/CitySelect.vue'
   import WeatherStat from './components/WeatherStat.vue'
 
-  const cityStats = [
+  const API_ENDPOINT = 'http://api.weatherapi.com/v1/'
+  const API_KEY = '6346860df8e747d2b20173736250705'
+
+  const cityStats = ref([
     {
       label: 'Влажность',
       value: '90%',
@@ -15,7 +19,19 @@
       label: 'Ветер',
       value: '3 м/ч',
     },
-  ]
+  ])
+
+  async function fetchForecast(city) {
+    const params = new URLSearchParams({
+      q: city,
+      lang: 'ru',
+      key: API_KEY,
+      days: 3,
+    }).toString()
+    const response = await fetch(`${API_ENDPOINT}forecast.json?${params}`)
+    const data = await response.json()
+    console.log(data)
+  }
 </script>
 
 <template>
@@ -28,7 +44,7 @@
           <WeatherStat v-for="stat in cityStats" :key="stat.label" v-bind="stat" />
         </div>
 
-        <CitySelect />
+        <CitySelect @update:city="fetchForecast" />
       </div>
     </div>
   </main>

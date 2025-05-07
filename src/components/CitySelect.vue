@@ -1,29 +1,36 @@
 <template>
   <div class="city-select">
-    <AppButton v-if="!isEdited" class="city-select__change" @click="edit(true)">
+    <AppButton v-if="!isEdited" class="city-select__change" @click="isEdited = true">
       <IconLocation />
       Изменить город
     </AppButton>
 
     <div v-else class="city-select__label">
       <AppInput v-model="city" type="text" name="city-select" placeholder="Введите город" />
-      <AppButton @click="edit(false)">Сохранить</AppButton>
+      <AppButton @click="selectCity()">Сохранить</AppButton>
     </div>
   </div>
 </template>
 
 <script setup>
-  import { ref } from 'vue'
+  import { onMounted, ref } from 'vue'
   import AppButton from './AppButton.vue'
   import IconLocation from './Icons/IconLocation.vue'
   import AppInput from './AppInput.vue'
 
-  const isEdited = ref(false)
-  const city = ref('')
+  const emit = defineEmits(['update:city'])
 
-  function edit(isEdit) {
-    isEdited.value = isEdit
+  const city = ref('Калининград')
+  const isEdited = ref(false)
+
+  function selectCity() {
+    emit('update:city', city.value)
+    isEdited.value = false
   }
+
+  onMounted(() => {
+    emit('update:city', city.value)
+  })
 </script>
 
 <style scoped>
