@@ -6,7 +6,7 @@
     </AppButton>
 
     <div v-else class="city-select__label">
-      <AppInput type="text" name="city-select" placeholder="Введите город" />
+      <AppInput v-model="city" type="text" name="city-select" placeholder="Введите город" />
       <AppButton @click="edit(false)">Сохранить</AppButton>
     </div>
   </div>
@@ -19,6 +19,7 @@
   import AppInput from './AppInput.vue'
 
   const isEdited = ref(false)
+  const city = ref('')
 
   function edit(isEdit) {
     isEdited.value = isEdit
