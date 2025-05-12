@@ -97,6 +97,8 @@
     justify-self: end;
     grid-column: 2;
     grid-row: 1;
+    display: grid;
+    gap: 70px;
     position: relative;
     max-width: 415px;
     padding: 60px 50px 60px 0;
@@ -119,5 +121,11 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 2px;
+  }
+
+  .weather__stats {
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
   }
 </style>

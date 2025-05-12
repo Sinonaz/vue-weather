@@ -18,6 +18,7 @@
     justify-content: space-between;
     align-items: center;
     gap: 20px;
+    margin: 0;
     font-size: 28px;
     line-height: 1;
     color: white;
