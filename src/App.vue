@@ -3,6 +3,7 @@
   import CitySelect from './components/CitySelect.vue'
   import WeatherStat from './components/WeatherStat.vue'
   import AppError from './components/AppError.vue'
+  import DayCard from './components/DayCard.vue'
 
   const API_ENDPOINT = 'http://api.weatherapi.com/v1/'
   const API_KEY = '6346860df8e747d2b20173736250705'
@@ -35,7 +36,7 @@
       q: city,
       lang: 'ru',
       key: API_KEY,
-      days: 3,
+      days: 4,
     }).toString()
     const response = await fetch(`${API_ENDPOINT}forecast.json?${params}`)
 
@@ -56,6 +57,16 @@
       <div class="weather__right">
         <div class="weather__stats">
           <WeatherStat v-for="stat in statsModified" :key="stat.label" v-bind="stat" />
+        </div>
+
+        <div v-if="forecast.forecast" class="weather__days">
+          <DayCard
+            v-for="day in forecast.forecast.forecastday"
+            :key="day.date"
+            :date="new Date(day.date)"
+            :temp="day.day.avgtemp_c"
+            :weatherCode="day.day.condition.code"
+          />
         </div>
 
         <CitySelect @update:city="fetchForecast" />
@@ -96,11 +107,17 @@
     grid-row: 1;
     height: fit-content;
     padding: 15px 50px;
-    background-color: #272e37;
+    background-color: var(--gray);
     border-radius: 0 0 25px 25px;
     font-size: 18px;
     line-height: 1.1;
     text-align: center;
     box-shadow: 1px 2px 4px 0px #222831;
+  }
+
+  .weather__days {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
   }
 </style>
