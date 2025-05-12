@@ -2,7 +2,7 @@
   import { computed, ref } from 'vue'
   import CitySelect from './components/CitySelect.vue'
   import WeatherStat from './components/WeatherStat.vue'
-import AppError from './components/AppError.vue'
+  import AppError from './components/AppError.vue'
 
   const API_ENDPOINT = 'http://api.weatherapi.com/v1/'
   const API_KEY = '6346860df8e747d2b20173736250705'
@@ -12,18 +12,20 @@ import AppError from './components/AppError.vue'
   const error = ref()
   const statsModified = computed(() => {
     return [
-    {
-      label: 'Влажность',
-      value: forecast.value.current  && !error.value ? `${forecast.value.current.humidity} %` : '-',
-    },
-    {
-      label: 'Облачность',
-      value: forecast.value.current  && !error.value ? `${forecast.value.current.cloud} %` : '-',
-    },
-    {
-      label: 'Ветер',
-      value: forecast.value.current  && !error.value ? `${forecast.value.current.wind_kph} км/ч` : '-',
-    },
+      {
+        label: 'Влажность',
+        value:
+          forecast.value.current && !error.value ? `${forecast.value.current.humidity} %` : '-',
+      },
+      {
+        label: 'Облачность',
+        value: forecast.value.current && !error.value ? `${forecast.value.current.cloud} %` : '-',
+      },
+      {
+        label: 'Ветер',
+        value:
+          forecast.value.current && !error.value ? `${forecast.value.current.wind_kph} км/ч` : '-',
+      },
     ]
   })
   const errorDisplay = computed(() => errorMap.get(error.value?.error?.code))
@@ -38,7 +40,7 @@ import AppError from './components/AppError.vue'
     const response = await fetch(`${API_ENDPOINT}forecast.json?${params}`)
 
     if (response.status !== 200) {
-      return error.value = await response.json()
+      return (error.value = await response.json())
     }
 
     error.value = null
@@ -94,7 +96,7 @@ import AppError from './components/AppError.vue'
     grid-row: 1;
     height: fit-content;
     padding: 15px 50px;
-    background-color: #272E37;
+    background-color: #272e37;
     border-radius: 0 0 25px 25px;
     font-size: 18px;
     line-height: 1.1;
