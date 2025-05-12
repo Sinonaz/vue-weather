@@ -1,25 +1,32 @@
 <script setup>
-  import { ref } from 'vue'
+  import { computed, ref } from 'vue'
   import CitySelect from './components/CitySelect.vue'
   import WeatherStat from './components/WeatherStat.vue'
+import AppError from './components/AppError.vue'
 
   const API_ENDPOINT = 'http://api.weatherapi.com/v1/'
   const API_KEY = '6346860df8e747d2b20173736250705'
+  const errorMap = new Map([[1006, 'Город не найден']])
 
-  const cityStats = ref([
+  const forecast = ref({})
+  const error = ref()
+  const statsModified = computed(() => {
+    return [
     {
       label: 'Влажность',
-      value: '90%',
+      value: forecast.value.current  && !error.value ? `${forecast.value.current.humidity} %` : '-',
     },
     {
-      label: 'Осадки',
-      value: '0%',
+      label: 'Облачность',
+      value: forecast.value.current  && !error.value ? `${forecast.value.current.cloud} %` : '-',
     },
     {
       label: 'Ветер',
-      value: '3 м/ч',
+      value: forecast.value.current  && !error.value ? `${forecast.value.current.wind_kph} км/ч` : '-',
     },
-  ])
+    ]
+  })
+  const errorDisplay = computed(() => errorMap.get(error.value?.error?.code))
 
   async function fetchForecast(city) {
     const params = new URLSearchParams({
@@ -29,8 +36,13 @@
       days: 3,
     }).toString()
     const response = await fetch(`${API_ENDPOINT}forecast.json?${params}`)
-    const data = await response.json()
-    console.log(data)
+
+    if (response.status !== 200) {
+      return error.value = await response.json()
+    }
+
+    error.value = null
+    forecast.value = await response.json()
   }
 </script>
 
@@ -41,11 +53,13 @@
 
       <div class="weather__right">
         <div class="weather__stats">
-          <WeatherStat v-for="stat in cityStats" :key="stat.label" v-bind="stat" />
+          <WeatherStat v-for="stat in statsModified" :key="stat.label" v-bind="stat" />
         </div>
 
         <CitySelect @update:city="fetchForecast" />
       </div>
+
+      <AppError v-if="error" :error="errorDisplay" class="weather__error" />
     </div>
   </main>
 </template>
@@ -62,12 +76,29 @@
     grid-template-columns: auto 1fr;
     width: 100%;
     max-width: 942px;
-    padding: 60px 50px;
     background: var(--dark-gray);
     border-radius: 25px;
   }
 
   .weather__right {
+    justify-self: end;
+    grid-column: 2;
+    grid-row: 1;
+    position: relative;
     max-width: 415px;
+    padding: 60px 50px 60px 0;
+  }
+
+  .weather__error {
+    grid-column: 2;
+    grid-row: 1;
+    height: fit-content;
+    padding: 15px 50px;
+    background-color: #272E37;
+    border-radius: 0 0 25px 25px;
+    font-size: 18px;
+    line-height: 1.1;
+    text-align: center;
+    box-shadow: 1px 2px 4px 0px #222831;
   }
 </style>

@@ -6,7 +6,7 @@
     </AppButton>
 
     <div v-else class="city-select__label">
-      <AppInput v-model="city" type="text" name="city-select" placeholder="Введите город" />
+      <AppInput v-model="city" @keyup.enter="selectCity()" type="text" name="city-select" placeholder="Введите город" />
       <AppButton @click="selectCity()">Сохранить</AppButton>
     </div>
   </div>
