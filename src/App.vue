@@ -4,6 +4,7 @@
   import WeatherStat from './components/WeatherStat.vue'
   import AppError from './components/AppError.vue'
   import DayCard from './components/DayCard.vue'
+  import InfoPanel from './components/InfoPanel.vue'
 
   const API_ENDPOINT = 'http://api.weatherapi.com/v1/'
   const API_KEY = '6346860df8e747d2b20173736250705'
@@ -53,7 +54,7 @@
 <template>
   <main class="main">
     <div class="weather">
-      <div class="weather__left"></div>
+      <InfoPanel class="weather__left" />
 
       <div class="weather__right">
         <div class="weather__stats">
@@ -85,15 +86,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 50px;
   }
 
   .weather {
-    display: grid;
-    grid-template-columns: auto 1fr;
+    display: flex;
     width: 100%;
     max-width: 942px;
     background: var(--dark-gray);
     border-radius: 25px;
+  }
+
+  .weather__left {
+    margin: -25px 0;
   }
 
   .weather__right {
@@ -102,9 +107,9 @@
     grid-row: 1;
     display: grid;
     gap: 70px;
+    width: 100%;
     position: relative;
-    max-width: 415px;
-    padding: 60px 50px 60px 0;
+    padding: 60px 50px;
   }
 
   .weather__error {
