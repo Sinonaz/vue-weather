@@ -24,8 +24,9 @@
   import AppButton from './AppButton.vue'
   import IconLocation from './Icons/IconLocation.vue'
   import AppInput from './AppInput.vue'
+  import { cityProvide } from '@/constants.js'
 
-  const city = inject('city')
+  const city = inject(cityProvide)
 
   const isEdited = ref(false)
   const inputValue = ref(city.value)

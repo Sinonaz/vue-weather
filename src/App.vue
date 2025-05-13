@@ -2,16 +2,14 @@
   import { provide, ref, watch } from 'vue'
   import InfoPanel from './components/InfoPanel.vue'
   import PanelRight from './components/PanelRight.vue'
-
-  const API_ENDPOINT = 'http://api.weatherapi.com/v1/'
-  const API_KEY = '6346860df8e747d2b20173736250705'
+  import { API_ENDPOINT, API_KEY, cityProvide } from '@/constants.js'
 
   const forecast = ref({})
   const error = ref()
   const activeIndex = ref(0)
   const city = ref('Калининград')
 
-  provide('city', city)
+  provide(cityProvide, city)
 
   async function fetchForecast(city) {
     const params = new URLSearchParams({

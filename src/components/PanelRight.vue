@@ -28,6 +28,7 @@
   import CitySelect from './CitySelect.vue'
   import DayCard from './DayCard.vue'
   import WeatherStat from './WeatherStat.vue'
+  import { errorMap } from '@/constants.js'
 
   const { error, forecast, activeIndex } = defineProps({
     error: Object,
@@ -36,8 +37,6 @@
   })
 
   const emit = defineEmits(['update:active-index'])
-
-  const errorMap = new Map([[1006, 'Город не найден']])
 
   const statsData = computed(() => {
     return [
