@@ -1,5 +1,5 @@
 <script setup>
-  import { ref } from 'vue'
+  import { provide, ref, watch } from 'vue'
   import InfoPanel from './components/InfoPanel.vue'
   import PanelRight from './components/PanelRight.vue'
 
@@ -9,6 +9,9 @@
   const forecast = ref({})
   const error = ref()
   const activeIndex = ref(0)
+  const city = ref('Калининград')
+
+  provide('city', city)
 
   async function fetchForecast(city) {
     const params = new URLSearchParams({
@@ -26,6 +29,14 @@
     error.value = null
     forecast.value = await response.json()
   }
+
+  watch(
+    city,
+    () => {
+      fetchForecast(city.value)
+    },
+    { immediate: true },
+  )
 </script>
 
 <template>
@@ -37,7 +48,6 @@
         :error
         :forecast
         :active-index="activeIndex"
-        @update:city="(city) => fetchForecast(city)"
         @update:active-index="(i) => (activeIndex = i)"
       />
     </div>

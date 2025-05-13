@@ -16,7 +16,7 @@
       />
     </div>
 
-    <CitySelect @update:city="(city) => emit('update:city', city)" />
+    <CitySelect />
 
     <AppError v-if="error" :error="errorDisplay" class="right-panel__error" />
   </div>
@@ -35,7 +35,7 @@
     activeIndex: Number,
   })
 
-  const emit = defineEmits(['update:city', 'update:active-index'])
+  const emit = defineEmits(['update:active-index'])
 
   const errorMap = new Map([[1006, 'Город не найден']])
 

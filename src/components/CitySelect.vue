@@ -7,7 +7,7 @@
 
     <div v-else class="city-select__label">
       <AppInput
-        v-model="city"
+        v-model="inputValue"
         @keyup.enter="selectCity()"
         v-focus
         type="text"
@@ -20,24 +20,20 @@
 </template>
 
 <script setup>
-  import { onMounted, ref } from 'vue'
+  import { inject, ref } from 'vue'
   import AppButton from './AppButton.vue'
   import IconLocation from './Icons/IconLocation.vue'
   import AppInput from './AppInput.vue'
 
-  const emit = defineEmits(['update:city'])
+  const city = inject('city')
 
-  const city = ref('Калининград')
   const isEdited = ref(false)
+  const inputValue = ref(city.value)
 
   function selectCity() {
-    emit('update:city', city.value)
+    city.value = inputValue.value
     isEdited.value = false
   }
-
-  onMounted(() => {
-    emit('update:city', city.value)
-  })
 </script>
 
 <style scoped>
