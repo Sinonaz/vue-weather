@@ -1,8 +1,11 @@
 <template>
   <button class="day-card" :class="{ 'day-card--active': isActive }">
-    <IconSun v-if="weatherCode === 1000" :color="isActive ? 'black' : 'white'" />
-    <IconCloud v-if="weatherCode === 1189" :color="isActive ? 'black' : 'white'" />
-    <IconRain v-if="weatherCode === 1063" :color="isActive ? 'black' : 'white'" />
+    <IconSun v-if="weatherCode <= 1003" :color="isActive ? 'black' : 'white'" />
+    <IconCloud
+      v-if="weatherCode >= 1006 && weatherCode < 1063"
+      :color="isActive ? 'black' : 'white'"
+    />
+    <IconRain v-if="weatherCode >= 1063" :color="isActive ? 'black' : 'white'" />
 
     <p class="day-card__day-name">{{ date.toLocaleDateString('ru-RU', { weekday: 'short' }) }}</p>
     <p class="day-card__stat">{{ temp }} ℃</p>

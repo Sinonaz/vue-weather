@@ -11,6 +11,7 @@
 
   const forecast = ref({})
   const error = ref()
+  const activeIndex = ref(0)
   const statsModified = computed(() => {
     return [
       {
@@ -61,11 +62,13 @@
 
         <div v-if="forecast.forecast" class="weather__days">
           <DayCard
-            v-for="day in forecast.forecast.forecastday"
+            v-for="(day, index) in forecast.forecast.forecastday"
             :key="day.date"
             :date="new Date(day.date)"
             :temp="day.day.avgtemp_c"
-            :weatherCode="day.day.condition.code"
+            :weather-code="day.day.condition.code"
+            :is-active="activeIndex === index"
+            @click="activeIndex = index"
           />
         </div>
 
