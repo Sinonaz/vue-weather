@@ -19,7 +19,7 @@
     align-items: center;
     gap: 20px;
     margin: 0;
-    font-size: 28px;
+    font-size: 25px;
     line-height: 1;
     color: white;
     text-transform: uppercase;

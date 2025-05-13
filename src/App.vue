@@ -40,7 +40,11 @@
 <template>
   <main class="main">
     <div class="weather">
-      <InfoPanel class="weather__left" />
+      <InfoPanel
+        :location="forecast.location?.name"
+        :data="forecast.forecast?.forecastday[activeIndex]"
+        class="weather__left"
+      />
 
       <PanelRight
         :error

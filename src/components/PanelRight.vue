@@ -42,15 +42,24 @@
     return [
       {
         label: 'Влажность',
-        value: forecast.current && !error ? `${forecast.current.humidity} %` : '-',
+        value:
+          forecast.forecast && !error
+            ? `${forecast.forecast.forecastday[activeIndex].day.avghumidity} %`
+            : '-',
       },
       {
-        label: 'Облачность',
-        value: forecast.current && !error ? `${forecast.current.cloud} %` : '-',
+        label: 'Вероятность дождя',
+        value:
+          forecast.forecast && !error
+            ? `${forecast.forecast.forecastday[activeIndex].day.daily_chance_of_rain} %`
+            : '-',
       },
       {
         label: 'Ветер',
-        value: forecast.current && !error ? `${forecast.current.wind_kph} км/ч` : '-',
+        value:
+          forecast.forecast && !error
+            ? `${forecast.forecast.forecastday[activeIndex].day.maxwind_kph} км/ч`
+            : '-',
       },
     ]
   })

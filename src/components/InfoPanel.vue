@@ -1,22 +1,39 @@
 <template>
   <div class="info">
     <div class="info__header">
-      <p class="info__day">Вторник</p>
-      <p class="info__date">20 июня 2025</p>
-      <p class="info__location">Москва</p>
+      <p class="info__day">
+        {{ data ? new Date(data.date).toLocaleDateString('ru-Ru', { weekday: 'long' }) : '-' }}
+      </p>
+      <p class="info__date">
+        {{ data ? new Date(data.date).toLocaleDateString('ru-Ru', { dateStyle: 'long' }) : '-' }}
+      </p>
+      <p class="info__location">{{ location ?? '-' }}</p>
     </div>
 
     <div class="info__footer">
-      <IconCloud width="95" height="95" />
+      <IconSun v-if="data && data.day.condition.code <= 1003" width="95" height="95" />
+      <IconCloud
+        v-if="data && data.day.condition.code >= 1006 && data.day.condition.code < 1063"
+        width="95"
+        height="95"
+      />
+      <IconRain v-if="data && data.day.condition.code >= 1063" width="95" height="95" />
 
-      <p class="info__temp">29 °C</p>
-      <p class="info__condition">Солнечно</p>
+      <p class="info__temp">{{ data ? data.day.avgtemp_c : '-' }} °C</p>
+      <p class="info__condition">{{ data ? data.day.condition.text : '-' }}</p>
     </div>
   </div>
 </template>
 
 <script setup>
   import IconCloud from './Icons/weather/IconCloud.vue'
+  import IconRain from '@/components/Icons/weather/IconRain.vue'
+  import IconSun from '@/components/Icons/weather/IconSun.vue'
+
+  const { location, data } = defineProps({
+    location: String,
+    data: Object,
+  })
 </script>
 
 <style scoped>
